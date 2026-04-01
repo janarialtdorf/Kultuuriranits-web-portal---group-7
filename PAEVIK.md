@@ -58,28 +58,28 @@ Kultuurihariduse portaal osutus sobivaks, kuna see ühendab hariduse, kultuuri j
 
 Võtsime kliendiga ühendust e-kirja teel ning leppisime kokku esimese kohtumise Zoomis. Enne kohtumist saatsime kliendile lühitutvustuse meie meeskonna kohta ning pakkusime välja sobiva aja.
 
-### Mida teada saime
+**Mida teada saime**
 - õpetajatel on raske kultuuriprogramme leida  
 - info on killustunud erinevate kanalite vahel  
 - broneerimisprotsess on keeruline ja aeganõudev  
 - süsteem peaks toetama õppekavaga seotud otsingut  
 - kultuurihariduse valdkonnas on üldisem osalusprobleem ning formaal- ja mitteformaalõppe lõimimine on keeruline  
 
-### Kuidas arusaam muutus
+**Kuidas arusaam muutus**
 Esialgne idee täpsustus – tegemist ei ole lihtsalt sündmusteportaaliga, vaid õpetaja igapäevast tööd toetava töövahendiga, mille eesmärk on aidata sobivaid programme leida, võrrelda ja tellida. Samuti saime laiemast vaatenurgast kinnitust, et sarnaseid keskseid portaale kasutatakse edukalt ka teistes riikides (nt Läti, Leedu ja Norra).
 
-### Mis läks hästi
+**Mis läks hästi**
 - küsimused olid enne kohtumist ette valmistatud  
 - kõik meeskonnaliikmed osalesid aktiivselt vestluses  
 - kohtumine aitas kinnitada, et meie esialgne visioon oli kliendi omaga suuresti kooskõlas  
 - saime projekti jaoks selge strateegilise suuna  
 
-### Mida teha paremini
+**Mida teha paremini**
 - esitada järgmistes kohtumistes konkreetsemaid ja funktsionaalsusele suunatud küsimusi  
 - vältida liiga varajases faasis küsimusi, millele kliendil ei ole veel võimalik vastata  
 - keskenduda kohtumistel rohkem reaalsele kasutusprotsessile ja kasutajate vajadustele  
 
-### Järgmised sammud
+**Järgmised sammud**
 - täpsustada kasutajagrupid ja nende rollid süsteemis  
 - koguda näiteid päris kasutusolukordadest õpetajate töös  
 - otsustada, millised funktsionaalsused moodustavad lahenduse tuuma ja millised jäävad lisaväärtuseks (nt soovitussüsteem, tehisintellektil põhinev otsing)  
