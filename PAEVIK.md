@@ -56,27 +56,34 @@ Kultuurihariduse portaal osutus sobivaks, kuna see ühendab hariduse, kultuuri j
 
 ## Nädal 3 Esimene kontakt kliendiga
 
-Võtsime kliendiga ühendust e-kirja teel ning leppisime kokku kohtumise Zoomis.
+Võtsime kliendiga ühendust e-kirja teel ning leppisime kokku esimese kohtumise Zoomis. Enne kohtumist saatsime kliendile lühitutvustuse meie meeskonna kohta ning pakkusime välja sobiva aja.
 
 ### Mida teada saime
-- õpetajatel on raske programme leida  
-- info on killustunud  
-- broneerimine on keeruline  
+- õpetajatel on raske kultuuriprogramme leida  
+- info on killustunud erinevate kanalite vahel  
+- broneerimisprotsess on keeruline ja aeganõudev  
+- süsteem peaks toetama õppekavaga seotud otsingut  
+- kultuurihariduse valdkonnas on üldisem osalusprobleem ning formaal- ja mitteformaalõppe lõimimine on keeruline  
 
 ### Kuidas arusaam muutus
-Esialgne idee täpsustus – tegemist ei ole lihtsalt sündmusteportaaliga, vaid õpetaja töövahendiga.
+Esialgne idee täpsustus – tegemist ei ole lihtsalt sündmusteportaaliga, vaid õpetaja igapäevast tööd toetava töövahendiga, mille eesmärk on aidata sobivaid programme leida, võrrelda ja tellida. Samuti saime laiemast vaatenurgast kinnitust, et sarnaseid keskseid portaale kasutatakse edukalt ka teistes riikides (nt Läti, Leedu ja Norra).
 
 ### Mis läks hästi
-- küsimused olid ette valmistatud  
-- kõik meeskonnaliikmed osalesid  
+- küsimused olid enne kohtumist ette valmistatud  
+- kõik meeskonnaliikmed osalesid aktiivselt vestluses  
+- kohtumine aitas kinnitada, et meie esialgne visioon oli kliendi omaga suuresti kooskõlas  
+- saime projekti jaoks selge strateegilise suuna  
 
 ### Mida teha paremini
-- esitada konkreetsemaid küsimusi  
-- vältida liiga varajases faasis keerulisi küsimusi  
+- esitada järgmistes kohtumistes konkreetsemaid ja funktsionaalsusele suunatud küsimusi  
+- vältida liiga varajases faasis küsimusi, millele kliendil ei ole veel võimalik vastata  
+- keskenduda kohtumistel rohkem reaalsele kasutusprotsessile ja kasutajate vajadustele  
 
 ### Järgmised sammud
-- täpsustada kasutajagrupid  
-- koguda päris kasutusnäiteid  
+- täpsustada kasutajagrupid ja nende rollid süsteemis  
+- koguda näiteid päris kasutusolukordadest õpetajate töös  
+- otsustada, millised funktsionaalsused moodustavad lahenduse tuuma ja millised jäävad lisaväärtuseks (nt soovitussüsteem, tehisintellektil põhinev otsing)  
+- valmistuda järgmiseks kohtumiseks täpsema funktsionaalse küsimustikuga   
 
 ---
 
@@ -85,70 +92,76 @@ Esialgne idee täpsustus – tegemist ei ole lihtsalt sündmusteportaaliga, vaid
 **Tegevused**
 - täpsustasime projekti probleemi  
 - viisime läbi konkurentsianalüüsi  
+- analüüsisime õpetajate tööprotsessi kultuuriprogrammide leidmisel ja broneerimisel  
 
 **Kas plaan sai tehtud?**  
 Jah, kõik planeeritud tegevused said tehtud.
 
 **Mis takistas?**  
-Suuremaid takistusi ei esinenud.
+Suuremaid takistusi ei esinenud, kuid sarnaste ja otseselt haridusvaldkonnale suunatud lahenduste leidmine oli keeruline, mis tegi võrdlemise aeganõudvamaks.
 
 **Kogemus (rõõmud ja mured)**  
-Rõõmu pakkus see, et probleem muutus palju selgemaks. Samas oli keeruline leida piisavalt sarnaseid lahendusi võrdlemiseks.
+Rõõmu pakkus see, et probleem muutus oluliselt selgemaks ning saime paremini aru õpetajate tegelikust tööprotsessist. Samas oli keeruline leida piisavalt sarnaseid keskkondi, mis oleksid mõeldud just haridusprogrammide haldamiseks, mitte ainult üldiseks sündmuste sirvimiseks.
 
 **Mida teha paremini**  
-Keskenduda rohkem kasutajate vajaduste analüüsile.
+- keskenduda rohkem kasutajate vajaduste analüüsile ja nende igapäevase töövoo mõistmisele  
+- koguda võimalusel rohkem otseseid näiteid õpetajate kogemustest ja probleemidest
 
 **Järgmise nädala plaan**
-- luua persoonad  
-- koostada stsenaariumid  
+- luua persoonad, mis põhinevad õpetajate tüüpilistel kasutusmustritel  
+- koostada stsenaariumid, mis kirjeldavad kultuuriprogrammi leidmise ja broneerimise protsessi algusest lõpuni 
 
 ---
 
 ## Nädal 5 (Persoonad ja stsenaariumid)
 
 **Tegevused**
-- lõime 5 persoonat  
-- koostasime kasutusstsenaariumid  
+- lõime 5 persoonat Canva keskkonnas  
+- koostasime kasutusstsenaariumid, mis kirjeldavad portaali kasutamist erinevates olukordades  
+- määratlesime peamised kasutajagrupid: õpetajad ja kultuuriasutuste esindajad  
 
 **Kas plaan sai tehtud?**  
-Jah, plaan täideti.
+Jah, plaan täideti ning kõik kavandatud persoonad ja stsenaariumid valmisid.
 
 **Mis takistas?**  
-Ajaplaneerimine oli kohati keeruline.
+Ajaplaneerimine oli kohati keeruline, kuna persoonade loomine ja stsenaariumide koostamine nõudis rohkem arutelu ja täpsustamist, kui algselt arvasime.
 
 **Kogemus (rõõmud ja mured)**  
-Rõõmu pakkus kasutajate parem mõistmine. Ebakindlust tekitas see, kas loodud persoonad peegeldavad piisavalt täpselt päris kasutajaid.
+Rõõmu pakkus kasutajate parem mõistmine ning see, et saime persona kaudu visualiseerida, kellele me tegelikult lahendust loome. Ebakindlust tekitas aga küsimus, kas loodud persoonad peegeldavad piisavalt täpselt päris kasutajaid, kuna need põhinesid peamiselt kaudsel infol ja varasematel vestlustel.
 
 **Mida teha paremini**  
-Kaasata rohkem päris kasutajate tagasisidet.
+- kaasata rohkem päris kasutajate tagasisidet, et kontrollida persoonade realistlikkust  
+- siduda persoonad ja stsenaariumid otsesemalt kogutud intervjuude ja näidetega  
 
 **Järgmise nädala plaan**
-- koostada kasutajalood  
-- viia läbi intervjuud  
+- koostada kasutajalood, mis põhinevad loodud persoonadel ja stsenaariumidel  
+- viia läbi intervjuud, et valideerida meie arusaamu kasutajate vajadustest ja tööprotsessist 
 
 ---
 
 ## Nädal 6 (Kasutajalood ja intervjuud)
 
 **Tegevused**
-- koostasime kasutajalood  
-- viisime läbi intervjuud  
+- koostasime kasutajalood õpetajate ja kultuuriasutuste esindajate vaatenurgast  
+- viisime läbi intervjuud, et valideerida loodud persoonad ja stsenaariumid  
+- kogusime tagasisidet kasutajate tegelike probleemide ja tööprotsesside kohta  
 
 **Kas plaan sai tehtud?**  
-Enamasti jah.
+Enamasti jah – kasutajalood said koostatud ning osa planeeritud intervjuudest viidi läbi.
 
 **Mis takistas?**  
-Kõiki planeeritud intervjuusid ei õnnestunud ajapuuduse tõttu läbi viia.
+Kõiki planeeritud intervjuusid ei õnnestunud ajapuuduse tõttu läbi viia, kuna sobivate aegade leidmine intervjueeritavatega osutus keeruliseks.
 
 **Kogemus (rõõmud ja mured)**  
-Intervjuud andsid väga väärtuslikku infot. Samas tekitas ajapuudus pinget ning ajaplaneerimine osutus keerulisemaks kui ootasime.
+Intervjuud andsid väga väärtuslikku ja praktilist infot kasutajate tegelike kogemuste kohta. Saime kinnitust, et varem kirjeldatud stsenaariumid olid suures osas realistlikud, kuid esile tulid ka uued probleemid, näiteks transpordi, logistika ja ajaplaneerimisega seotud raskused. Samas tekitas ajapuudus pinget ning ajaplaneerimine osutus keerulisemaks, kui algselt ootasime.
 
 **Mida teha paremini**  
-Planeerida intervjuud varasemalt ja jaotada ülesanded selgemalt.
+- planeerida intervjuud varasemalt ja jätta nende läbiviimiseks rohkem ajavaru  
+- jaotada meeskonnas intervjuudega seotud ülesanded selgemalt, et vähendada ajasurvet  
 
 **Järgmise nädala plaan**
-- koostada sitemap  
-- luua kasutajateekonnad  
+- koostada portaali sitemap, et visualiseerida süsteemi struktuur  
+- luua kasutajateekonnad, mis kirjeldavad samm-sammult, kuidas kasutajad süsteemis eesmärgini jõuavad
 
 ---
 
@@ -156,21 +169,26 @@ Planeerida intervjuud varasemalt ja jaotada ülesanded selgemalt.
 
 **Tegevused**
 - koostasime süsteemi struktuuri (sitemap)  
-- modelleerisime kasutajateekonnad  
+- modelleerisime kasutajateekonnad õpetajatele ja kultuuriasutuste esindajatele  
 
 **Kas plaan sai tehtud?**  
 Jah, plaan täideti.
 
 **Mis takistas?**  
-Arutelud struktuuri loogika üle võtsid rohkem aega kui planeeritud.
+Arutelud struktuuri loogika üle võtsid rohkem aega kui algselt planeeritud.
 
 **Kogemus (rõõmud ja mured)**  
-Rõõmu pakkus selge ja loogilise struktuuri tekkimine. Pikad arutelud olid kohati väsitavad, kuid aitasid paremate lahendusteni jõuda.
+Rõõmu pakkus selge ja loogilise süsteemistruktuuri tekkimine. Pikad arutelud olid kohati väsitavad, kuid aitasid jõuda paremate ja läbimõeldumate lahendusteni. Modellitud kasutajateekonnad aitasid paremini mõista, kuidas erinevad kasutajad portaalis liiguvad ja oma eesmärke saavutavad.
 
 **Mida teha paremini**  
-Teha otsuseid kiiremini ja määrata selgem vastutus.
+- teha otsuseid kiiremini ning määrata selgem vastutus eri teemade eest aruteludes  
+- keskenduda olulisematele detailidele, et vältida liiga pikaks venivaid diskussioone
 
 **Järgmise nädala plaan**
-- alustada prototüüpimisega  
-- täpsustada süsteemi funktsionaalsusi
-- leppida kokku uus kohtumine kliendiga, et arutleda seni tehtud töö teemal  
+- alustada prototüüpimisega, kasutades loodud sitemap’i ja kasutajateekondi  
+- täpsustada süsteemi funktsionaalsusi, näiteks otsing, filtreerimine ja broneerimissüsteem  
+- leppida kokku uus kohtumine kliendiga, et arutada seni tehtud töö tulemusi ja koguda täiendavat tagasisidet
+
+---
+
+## Nädal 8
