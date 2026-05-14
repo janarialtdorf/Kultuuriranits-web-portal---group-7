@@ -1,4 +1,4 @@
-package ee.meeskond7.Kultuuriranits;
+package ee.meeskond7.kultuuriranits_backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
