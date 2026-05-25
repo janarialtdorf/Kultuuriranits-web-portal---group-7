@@ -1,10 +1,7 @@
-// app/programs/page.tsx
 import { Program } from "../models/Program";
 import SearchBar from "./SearchBar";
 
-// Muudame funktsiooni nii, et see võtab vastu otsingusõna
 async function getPrograms(keyword?: string): Promise<Program[]> {
-    // Kui keyword on olemas, kasutame /program/search otspunkti, muidu tavalist listi
     const url = keyword
         ? `http://localhost:5050/program/search?keyword=${encodeURIComponent(keyword)}`
         : "http://localhost:5050/program";
@@ -20,13 +17,9 @@ async function getPrograms(keyword?: string): Promise<Program[]> {
     return res.json();
 }
 
-// Next.js (App Router) annab otsingu parameetrid siia kaasa.
-// Märkus: Kui kasutad Next.js v15+, peab searchParams olema Promise, 
-// aga vanemates versioonides (v13/v14) on see tavaline objekt. See lahendus töötab universaalselt:
 export default async function ProgramsPage(props: {
     searchParams: Promise<{ keyword?: string }> | { keyword?: string };
 }) {
-    // Tagame ühilduvuse uue ja vana Next.js versiooni vahel
     const resolvedParams = 'then' in props.searchParams ? await props.searchParams : props.searchParams;
     const keyword = resolvedParams?.keyword;
 
@@ -36,10 +29,8 @@ export default async function ProgramsPage(props: {
         <main style={{ padding: "20px", maxWidth: "800px", margin: "0 auto" }}>
             <h1>Programmid</h1>
 
-            {/* Lisame otsinguriba lehe ülaosasse */}
             <SearchBar />
 
-            {/* Kui midagi ei leitud, näitame teadet */}
             {programs.length === 0 ? (
                 <p style={{ color: "gray", fontStyle: "italic" }}>
                     Otsingule &quot;{keyword}&quot; vastavaid programme ei leitud.

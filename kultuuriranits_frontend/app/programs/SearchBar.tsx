@@ -1,4 +1,3 @@
-// app/programs/SearchBar.tsx
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
@@ -16,10 +15,8 @@ export default function SearchBar() {
         // Kui kasutaja trükib, lükkame päringu tegemist 300ms edasi
         const delayDebounceFn = setTimeout(() => {
             if (keyword.trim()) {
-                // router.replace ei tekita brauseri ajaloos iga tähe jaoks uut lehte
                 router.replace(`/programs?keyword=${encodeURIComponent(keyword.trim())}`);
             } else {
-                // Kui kast on tühi, näitame jälle kõiki
                 router.replace("/programs");
             }
         }, 300); // 300ms ooteaeg
