@@ -24,6 +24,8 @@ public class ProgramController {
     @Autowired
     private ProgramService programService;
 
+
+    //http://localhost:5050/program?page=1&size=3&sort=pricePerStudent,asc <-- sorteerib
     @GetMapping("/program")
     public Page<Program> getProgram(Pageable pageable){
         return programRepository.findAll(pageable);

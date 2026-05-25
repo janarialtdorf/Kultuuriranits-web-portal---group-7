@@ -1,19 +1,20 @@
 import { Program } from "../models/Program";
 import SearchBar from "../../components/SearchBar";
 import Pagination from "../../components/Pagination";
+import Sort from "../../components/Sort";
 
 interface FetchResult {
     content: Program[];
     totalPages: number;
 }
 
-async function getPrograms(keyword?: string, page: number = 0): Promise<FetchResult> {
+async function getPrograms(keyword?: string, page: number = 0, sort: string = "id,asc", size: number = 3): Promise<FetchResult> {
     const baseUrl = keyword
         ? `http://localhost:5050/program/search?keyword=${encodeURIComponent(keyword)}`
         : "http://localhost:5050/program";
 
     const separator = keyword ? "&" : "?";
-    const url = `${baseUrl}${separator}size=3&sort=id,asc&page=${page}`;
+    const url = `${baseUrl}${separator}size=${size}&sort=${sort}&page=${page}`;
 
     const res = await fetch(url, { cache: "no-store" });
     if (!res.ok) throw new Error("Failed to fetch programs");
@@ -27,30 +28,35 @@ async function getPrograms(keyword?: string, page: number = 0): Promise<FetchRes
 }
 
 export default async function ProgramsPage(props: {
-    searchParams: Promise<{ keyword?: string; page?: string }> | { keyword?: string; page?: string };
+    searchParams: Promise<{ keyword?: string; page?: string; sort?: string; size?: string }> | { keyword?: string; page?: string; sort?: string; size?: string };
 }) {
     const resolvedParams = 'then' in props.searchParams ? await props.searchParams : props.searchParams;
     const keyword = resolvedParams?.keyword;
 
-    // Loeme lehekülje numbri URL-ist. Kui seda seal pole, on lehekülg 0
     const page = Number(resolvedParams?.page) || 0;
+    const sort = resolvedParams?.sort || "id,asc";
+    const size = Number(resolvedParams?.size) || 3;
 
-    // Küsime andmed backendist, andes kaasa praeguse lehe ja keywordi
-    const { content: programs, totalPages } = await getPrograms(keyword, page);
+    const { content: programs, totalPages } = await getPrograms(keyword, page, sort, size);
 
     return (
         <main style={{ padding: "20px", maxWidth: "800px", margin: "0 auto" }}>
             <h1>Programmid</h1>
 
-            <SearchBar />
+            {/* OTSING JA SORTEERIMINE  */}
+            <div>
+                <div style={{ flex: 1, minWidth: "200px" }}>
+                    <SearchBar />
+                </div>
+                <Sort />
+            </div>
 
             {programs.length === 0 ? (
-                <p style={{ color: "gray", fontStyle: "italic" }}>
+                <p>
                     Otsingule &quot;{keyword}&quot; vastavaid programme ei leitud.
                 </p>
             ) : (
-                <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-
+                <div>
                     {programs.map((program) => (
                         <div
                             key={program.id}
