@@ -1,3 +1,5 @@
+import { Category } from "./Category"
+
 export interface Program {
     id: number
 
@@ -26,4 +28,6 @@ export interface Program {
     updatedAt: string
 
     organizationId: number
+
+    category: Category | null;
 }

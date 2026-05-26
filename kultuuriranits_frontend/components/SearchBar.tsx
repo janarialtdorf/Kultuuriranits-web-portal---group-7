@@ -14,16 +14,21 @@ export default function SearchBar() {
     useEffect(() => {
         // Kui kasutaja trükib, lükkame päringu tegemist 300ms edasi
         const delayDebounceFn = setTimeout(() => {
+            const params = new URLSearchParams(searchParams.toString());
+
             if (keyword.trim()) {
-                router.replace(`/programs?keyword=${encodeURIComponent(keyword.trim())}`);
+                params.set("keyword", keyword.trim());
             } else {
-                router.replace("/programs");
+                params.delete("keyword");
             }
+
+            // Uue otsingu puhul viskame lehekülje alati tagasi esimeseks (0)
+            params.set("page", "0");
+            router.replace(`/programs?${params.toString()}`);
         }, 300); // 300ms ooteaeg
 
-        // Kui kasutaja vajutab uut klahvi enne 300ms täitumist, tühistatakse eelmine taimer
         return () => clearTimeout(delayDebounceFn);
-    }, [keyword, router]);
+    }, [keyword, router, searchParams]);
 
     return (
         <div style={{ marginBottom: "25px" }}>

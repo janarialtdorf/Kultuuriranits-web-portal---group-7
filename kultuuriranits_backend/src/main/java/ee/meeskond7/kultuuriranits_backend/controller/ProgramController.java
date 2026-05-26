@@ -25,9 +25,12 @@ public class ProgramController {
     private ProgramService programService;
 
 
-    //http://localhost:5050/program?page=1&size=3&sort=pricePerStudent,asc <-- sorteerib
+    // http://localhost:5050/program?categoryId=3 <-- Filtreerib kategooria järgi
     @GetMapping("/program")
-    public Page<Program> getProgram(Pageable pageable){
+    public Page<Program> getProgram(@RequestParam(required = false) Long categoryId, Pageable pageable){
+        if (categoryId != null) {
+            return programRepository.findByCategoryId(categoryId, pageable);
+        }
         return programRepository.findAll(pageable);
     }
 
@@ -38,8 +41,8 @@ public class ProgramController {
 
     @DeleteMapping("/program/{id}")
     public List<Program> deleteProgram(@PathVariable Long id){
-        programRepository.deleteById(id); //kustutab
-        return programRepository.findAll(); //siin on uuenenud seis
+        programRepository.deleteById(id);
+        return programRepository.findAll();
     }
 
     @PostMapping("/program")
@@ -47,8 +50,8 @@ public class ProgramController {
         if (program.getId() != null){
             throw new RuntimeException("Cannot add with ID");
         }
-        programRepository.save(program); //siin salvestab
-        return programRepository.findAll(); //siin on uuenenud seis
+        programRepository.save(program);
+        return programRepository.findAll();
     }
 
     @PutMapping("/program")
@@ -59,16 +62,21 @@ public class ProgramController {
         if (!programRepository.existsById(program.getId())){
             throw new RuntimeException("Booking ID doesn't exist");
         }
-        programRepository.save(program); //siin salvestab
-        return programRepository.findAll(); //siin on uuenenud seis
+        programRepository.save(program);
+        return programRepository.findAll();
     }
 
-    //search bar programmide jaoks
-    //ProgramController ->> ProgramService ->> ProgramRepository ->> Frontend
+    // search bar programmide jaoks koos valikulise kategooriaga
+    // http://localhost:5050/program/search?keyword=teater&categoryId=3
     @GetMapping("/program/search")
-    public ResponseEntity<Page<Program>> searchPrograms(@RequestParam String keyword, Pageable pageable){
-        System.out.println("searching with "  + keyword); // keywordi kontrollimiseks
-        Page<Program> programs = programService.searchPrograms(keyword, pageable);
+    public ResponseEntity<Page<Program>> searchPrograms(
+            @RequestParam String keyword,
+            @RequestParam(required = false) Long categoryId,
+            Pageable pageable){
+
+        System.out.println("searching with keyword: " + keyword + " and categoryId: " + categoryId);
+
+        Page<Program> programs = programService.searchPrograms(keyword, categoryId, pageable);
         return new ResponseEntity<>(programs, HttpStatus.OK);
     }
 }

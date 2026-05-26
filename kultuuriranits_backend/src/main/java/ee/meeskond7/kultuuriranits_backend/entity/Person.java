@@ -23,6 +23,6 @@ public class Person {
     @Column(unique = true)
     private String personalCode;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Role role;
 }

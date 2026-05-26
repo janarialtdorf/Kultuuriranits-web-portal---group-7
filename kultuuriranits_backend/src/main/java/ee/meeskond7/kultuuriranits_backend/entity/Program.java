@@ -1,10 +1,6 @@
 package ee.meeskond7.kultuuriranits_backend.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -50,4 +46,7 @@ public class Program {
     private LocalDateTime updatedAt;
 
     private Integer organizationId;
+
+    @ManyToOne
+    private Category category;
 }
