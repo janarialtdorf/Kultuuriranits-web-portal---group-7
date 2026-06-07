@@ -7,6 +7,10 @@ export default function Home() {
       <Link href="/programs">Programmid</Link>
       <br />
       <Link href="/programs/add">Lisa uus programm</Link>
+      <br />
+      <Link href="/signup">Registreerimine</Link>
+      <br />
+      <Link href="/login">Sisselogimine</Link>
     </main>
   )
-}   
+};

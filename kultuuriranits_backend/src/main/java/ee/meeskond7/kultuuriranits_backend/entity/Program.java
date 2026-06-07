@@ -48,8 +48,6 @@ public class Program {
 
     private LocalDateTime updatedAt;
 
-    private Integer organizationId;
-
     private String imageName;
     private String imageType;
     @Lob
@@ -59,4 +57,7 @@ public class Program {
 
     @ManyToOne
     private Category category;
+
+/*    @ManyToOne
+    private Organization organization;*/
 }

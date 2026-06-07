@@ -4,15 +4,14 @@ import { Pagination } from "../../components/Pagination";
 import { Sort } from "../../components/Sort";
 import { CategoryFilter } from "../../components/CategoryFilter";
 import { Category } from "../../models/Category";
-const API_URL = process.env.NEXT_PUBLIC_BACK_URL;
 
+const API_URL = process.env.NEXT_PUBLIC_BACK_URL;
 
 interface FetchResult {
     content: Program[];
     totalPages: number;
 }
 
-// URL Query parameetrid
 interface SearchParams {
     keyword?: string;
     page?: string;
@@ -27,14 +26,14 @@ async function getCategories(): Promise<Category[]> {
         const res = await fetch(`${API_URL}/category`, {
             cache: "no-store"
         });
-
         return res.ok ? await res.json() : [];
-    } catch {
+    } catch (error) {
+        console.error("Viga kategooriate pärimisel backendist:", error);
         return [];
     }
 }
 
-// Programmide päring
+// GET programs (või search)
 async function getPrograms(
     keyword?: string,
     page = 0,
@@ -42,40 +41,38 @@ async function getPrograms(
     size = 3,
     categoryId?: string,
 ): Promise<FetchResult> {
+    try {
+        const baseUrl = `${API_URL}/program${keyword ? "/search" : ""}`;
 
-    const baseUrl =
-        `${API_URL}/program${keyword ? "/search" : ""}`;
+        const params = new URLSearchParams({
+            page: String(page),
+            size: String(size),
+            sort
+        });
 
-    // URL parameetrid
-    const params = new URLSearchParams({
-        page: String(page),
-        size: String(size),
-        sort
-    });
+        if (keyword) params.set("keyword", keyword);
+        if (categoryId) params.set("categoryId", categoryId);
 
-    if (keyword) {
-        params.set("keyword", keyword);
+        const res = await fetch(
+            `${baseUrl}?${params.toString()}`,
+            { cache: "no-store" }
+        );
+
+        if (!res.ok) {
+            console.error(`Backend tagastas vea staatuse: ${res.status}`);
+            return { content: [], totalPages: 1 };
+        }
+
+        const data = await res.json();
+
+        return {
+            content: data.content ?? [],
+            totalPages: data.totalPages ?? 1
+        };
+    } catch (error) {
+        console.error("Ei saanud Spring Boot backendiga ühendust (getPrograms):", error);
+        return { content: [], totalPages: 1 };
     }
-
-    if (categoryId) {
-        params.set("categoryId", categoryId);
-    }
-
-    const res = await fetch(
-        `${baseUrl}?${params.toString()}`,
-        { cache: "no-store" }
-    );
-
-    if (!res.ok) {
-        throw new Error("Programmide laadimine ebaõnnestus");
-    }
-
-    const data = await res.json();
-
-    return {
-        content: data.content ?? [],
-        totalPages: data.totalPages ?? 1
-    };
 }
 
 export default async function ProgramsPage({
@@ -83,7 +80,6 @@ export default async function ProgramsPage({
 }: {
     searchParams: Promise<SearchParams>;
 }) {
-
     const params = await searchParams;
 
     const keyword = params.keyword;
@@ -91,7 +87,6 @@ export default async function ProgramsPage({
     const sort = params.sort || "id,desc";
     const size = Number(params.size) || 3;
     const categoryId = params.categoryId;
-
     const [programData, categories] = await Promise.all([
         getPrograms(keyword, page, sort, size, categoryId),
         getCategories()
@@ -126,15 +121,9 @@ export default async function ProgramsPage({
                         alignItems: "center"
                     }}
                 >
-                    <div
-                        style={{
-                            flex: 1,
-                            minWidth: "200px"
-                        }}
-                    >
+                    <div style={{ flex: 1, minWidth: "200px" }}>
                         <SearchBar />
                     </div>
-
                     <Sort />
                 </div>
 
@@ -146,9 +135,8 @@ export default async function ProgramsPage({
 
             {/* Tulemused */}
             {programs.length === 0 ? (
-                <p>
-                    Otsingule või valitud kategooriale vastavaid programme ei
-                    leitud.
+                <p style={{ padding: "20px", background: "#f5f5f5", borderRadius: "5px" }}>
+                    Andmeid ei õnnestunud laadida või ühtegi programmi ei leitud. Veendu, et andmebaas ja backend töötavad.
                 </p>
             ) : (
                 <>
@@ -160,7 +148,6 @@ export default async function ProgramsPage({
                         }}
                     >
                         {programs.map((program) => {
-
                             const details = [
                                 ["Hind", `${program.pricePerStudent}€`],
                                 ["Kestus", `${program.durationMinutes} min`],
@@ -208,8 +195,7 @@ export default async function ProgramsPage({
                                                 fontWeight: "bold"
                                             }}
                                         >
-                                            {program.category.name ??
-                                                `Kategooria ${program.category.id}`}
+                                            {program.category.name ?? `Kategooria ${program.category.id}`}
                                         </span>
                                     )}
 

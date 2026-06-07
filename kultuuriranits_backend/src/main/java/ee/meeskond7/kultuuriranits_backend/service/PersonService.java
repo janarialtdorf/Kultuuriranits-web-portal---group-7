@@ -2,39 +2,42 @@ package ee.meeskond7.kultuuriranits_backend.service;
 
 import com.github.vladislavgoltjajev.personalcode.locale.estonia.EstonianPersonalCodeValidator;
 import ee.meeskond7.kultuuriranits_backend.entity.Person;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Service
 public class PersonService {
-    private final String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+(?:\\.[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+)*@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$";
-    private final Pattern pattern = Pattern.compile(regex);
+    private final Pattern pattern = Pattern.compile("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+(?:\\.[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+)*@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$");
     private final EstonianPersonalCodeValidator validator = new EstonianPersonalCodeValidator();
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-
-    public boolean isValid(String email) {
-        Matcher matcher = pattern.matcher(email);
-        return matcher.matches();
+    public String hashPassword(String password) {
+        return passwordEncoder.encode(password);
     }
 
-    public void validate(Person person) {
-        if (person.getId() != null) {
-            throw new RuntimeException("Cannot sign up with ID");
+    public boolean checkPassword(String rawPassword, String encodedPassword) {
+        return passwordEncoder.matches(rawPassword, encodedPassword);
+    }
+
+    public void validate(Person person, boolean isNew) {
+        if (isNew && person.getId() != null) {
+            throw new RuntimeException("Uuel kasutajal ei tohi olla ID-d");
         }
-        if (person.getEmail() != null) {
-            throw new RuntimeException("Cannot sign up with empty email");
+        if (!isNew && person.getId() == null) {
+            throw new RuntimeException("Profiili uuendamiseks on ID vajalik");
         }
-        if (person.getPersonalCode() != null) {
-            throw new RuntimeException("Cannot sign up with empty personal code");
+        if (person.getEmail() == null || person.getEmail().isBlank()) {
+            throw new RuntimeException("E-mail on kohustuslik");
         }
-        if (!isValid(person.getEmail())) {
-            throw new RuntimeException("invalid email");
+        if (person.getPersonalCode() == null || person.getPersonalCode().isBlank()) {
+            throw new RuntimeException("Isikukood on kohustuslik");
+        }
+        if (!pattern.matcher(person.getEmail()).matches()) {
+            throw new RuntimeException("Vigane e-maili formaat");
         }
         if (!validator.isValid(person.getPersonalCode())) {
-            throw new RuntimeException("invalid personal code");
+            throw new RuntimeException("Vigane isikukood. Server sai väärtuseks: [" + person.getPersonalCode() + "]");
         }
     }
-
 }
