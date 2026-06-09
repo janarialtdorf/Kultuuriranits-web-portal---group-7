@@ -13,6 +13,9 @@ export default function Home() {
       <br/>
       <Link href="/login">Sisselogimine</Link>
       </div>
+      <br />
+      <Link href="/contact">Kontakt</Link>
+      <br />
     </main>
   )
 };

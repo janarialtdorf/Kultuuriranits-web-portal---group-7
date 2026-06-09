@@ -1,11 +1,13 @@
-import { Program } from "../../models/Program";
-import { SearchBar } from "../../components/SearchBar";
-import { Pagination } from "../../components/Pagination";
-import { Sort } from "../../components/Sort";
-import { Category } from "../../models/Category";
-import { AdvancedFilters } from "../../components/AdvancedFilter";
-import { Organization } from "../../models/Organization";
-import Link from "next/link";
+import { Program } from "../../../models/Program";
+import { SearchBar } from "../../../components/SearchBar";
+import { Pagination } from "../../../components/Pagination";
+import { Sort } from "../../../components/Sort";
+import { CategoryFilter } from "../../../components/CategoryFilter";
+import { Category } from "../../../models/Category";
+import { AddFavorites } from "../../../components/AddFavorites";
+import { cookies } from "next/headers";
+import { Favorites } from "../../../models/Favorites";
+import { RemoveFavorites } from "../../../components/RemoveFavorites";
 
 const API_URL = process.env.NEXT_PUBLIC_BACK_URL;
 
@@ -20,18 +22,48 @@ interface SearchParams {
     sort?: string;
     size?: string;
     categoryId?: string;
-    organizationId?: string;
-    targetGroup?: string;
-    date?: string;
-    county?: string;
-    location?: string;
-    price?: string;
-    duration?: string;
-    groupSize?: string;
-    languages?: string;
-    wheelchair?: string;
-    specialNeeds?: string;
-    outdoor?: string;
+}
+
+// kasutaja tuvastamine sessiooni kaudu
+async function getCurrentUser(): Promise<{ id: number } | null> {
+    try {
+        const cookieStore = await cookies();
+        const cookieString = cookieStore.toString();
+
+        const res = await fetch(`${API_URL}/me`, {
+            headers: {
+                Cookie: cookieString,
+            },
+            cache: "no-store",
+        });
+
+        if (res.ok) {
+            return await res.json();
+        }
+        return null;
+    } catch (error) {
+        console.error("Viga sisselogitud kasutaja tuvastamisel:", error);
+        return null;
+    }
+}
+
+async function getUserFavorites(): Promise<Favorites[]> {
+    try {
+        const cookieStore = await cookies();
+        const cookieString = cookieStore.toString();
+
+        const res = await fetch(`${API_URL}/favorites`, {
+            headers: {
+                Cookie: cookieString,
+            },
+            cache: "no-store",
+        });
+
+        return res.ok ? await res.json() : [];
+    } catch (error) {
+        console.error("Viga kasutaja lemmikute pärimisel:", error);
+        return [];
+    }
 }
 
 // GET category
@@ -47,20 +79,6 @@ async function getCategories(): Promise<Category[]> {
     }
 }
 
-//Organization fetch
-async function getOrganizations() {
-    try {
-        const res = await fetch(`${API_URL}/organization`, {
-            cache: "no-store"
-        });
-
-        return res.ok ? await res.json() : [];
-    } catch (error) {
-        console.error("Viga organisatsioonide pärimisel backendist:", error);
-        return [];
-    }
-}
-
 // GET programs (või search)
 async function getPrograms(
     keyword?: string,
@@ -68,18 +86,6 @@ async function getPrograms(
     sort = "id,asc",
     size = 3,
     categoryId?: string,
-    organizationId?: string,
-    targetGroup?: string,
-    date?: string,
-    county?: string,
-    location?: string,
-    price?: string,
-    duration?: string,
-    groupSize?: string,
-    languages?: string,
-    wheelchair?: string,
-    specialNeeds?: string,
-    outdoor?: string,
 ): Promise<FetchResult> {
     try {
         const baseUrl = `${API_URL}/program${keyword ? "/search" : ""}`;
@@ -92,18 +98,6 @@ async function getPrograms(
 
         if (keyword) params.set("keyword", keyword);
         if (categoryId) params.set("categoryId", categoryId);
-        if (organizationId) params.set("organizationId", organizationId);
-        if (targetGroup) params.set("targetGroup", targetGroup);
-        if (date) params.set("date", date);
-        if (county) params.set("county", county);
-        if (location) params.set("location", location);
-        if (price) params.set("price", price);
-        if (duration) params.set("duration", duration);
-        if (groupSize) params.set("groupSize", groupSize);
-        if (languages) params.set("languages", languages);
-        if (wheelchair) params.set("wheelchair", wheelchair);
-        if (specialNeeds) params.set("specialNeeds", specialNeeds);
-        if (outdoor) params.set("outdoor", outdoor);
 
         const res = await fetch(
             `${baseUrl}?${params.toString()}`,
@@ -139,26 +133,15 @@ export default async function ProgramsPage({
     const sort = params.sort || "id,desc";
     const size = Number(params.size) || 3;
     const categoryId = params.categoryId;
-    const targetGroup = params.targetGroup;
-    const date = params.date;
-    const county = params.county;
-    const location = params.location;
-    const price = params.price;
-    const duration = params.duration;
-    const groupSize = params.groupSize;
-    const languages = params.languages;
-    const wheelchair = params.wheelchair;
-    const specialNeeds = params.specialNeeds;
-    const outdoor = params.outdoor;
-    const organizationId = params.organizationId;
-    const [programData, categories, organizations] = await Promise.all([
-        getPrograms(keyword, page, sort, size, categoryId, organizationId, targetGroup, date, county, location, price, duration, groupSize, languages, wheelchair, specialNeeds, outdoor),
+    const [programData, categories, currentUser, userFavorites] = await Promise.all([
+        getPrograms(keyword, page, sort, size, categoryId),
         getCategories(),
-        getOrganizations()
+        getCurrentUser(),
+        getUserFavorites()
     ]);
 
     const { content: programs, totalPages } = programData;
-
+    const currentUserId = currentUser ? currentUser.id : null;
     return (
         <main
             style={{
@@ -192,11 +175,10 @@ export default async function ProgramsPage({
                     <Sort />
                 </div>
 
-                <AdvancedFilters
+                <CategoryFilter
                     categories={categories}
-                    organizations={organizations}
+                    currentCategoryId={categoryId}
                 />
-
             </div>
 
             {/* Tulemused */}
@@ -226,7 +208,6 @@ export default async function ProgramsPage({
                                 ],
                                 ["Staatus", program.status]
                             ];
-
                             return (
                                 <div
                                     key={program.id}
@@ -237,6 +218,24 @@ export default async function ProgramsPage({
                                     }}
                                 >
                                     <h2>{program.title}</h2>
+                                    {/* Lemmiku nupp  */}
+                                    {currentUserId ? (
+                                        (() => {
+                                            const favoriteRelation = userFavorites.find(
+                                                (fav) => fav.program && fav.program.id === program.id
+                                            );
+
+                                            if (favoriteRelation) {
+                                                return (
+                                                    <RemoveFavorites favoriteId={favoriteRelation.id} apiUrl={API_URL} />);
+                                            } else {
+                                                return (
+                                                    <AddFavorites programId={program.id} personId={currentUserId} apiUrl={API_URL} />);
+                                            }
+                                        })()
+                                    ) : (
+                                        <p style={{ color: "gray", fontSize: "14px" }}>Logi sisse, et lisada lemmikutesse</p>
+                                    )}
                                     <img
                                         src={`${API_URL}/program/${program.id}/image`}
                                         alt={program.title}
@@ -267,15 +266,11 @@ export default async function ProgramsPage({
 
                                     <p>{program.description}</p>
 
-                                    <Link href={`/programs/${program.id}`}>Detailvaade</Link>
-
                                     {details.map(([label, value]) => (
                                         <p key={label}>
                                             <strong>{label}:</strong> {value}
                                         </p>
                                     ))}
-
-                                    
                                 </div>
                             );
                         })}
