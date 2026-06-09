@@ -11,6 +11,9 @@ export default function Home() {
       <Link href="/signup">Registreerimine</Link>
       <br />
       <Link href="/login">Sisselogimine</Link>
+      <br />
+      <Link href="/contact">Kontakt</Link>
+      <br />
     </main>
   )
 };
