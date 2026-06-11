@@ -98,7 +98,7 @@ export default async function ProgramPage({
             <div className="p-6 sm:p-8">
               <div className="flex items-center text-xs font-bold text-gray-400 gap-1.5 uppercase tracking-wider mb-2">
                 <span className="bg-blue-50 text-blue-700 border border-blue-100 text-[10px] font-extrabold px-2.5 py-0.5 rounded-md">
-                  {program.organization?.name}
+                  {program.organization?.name || "Kultuuriasutus"}
                 </span>
               </div>
               <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-gray-900 mb-6 leading-tight">
@@ -116,7 +116,7 @@ export default async function ProgramPage({
                       Asukoht
                     </span>
                     <span className="text-xs font-extrabold text-gray-700 leading-tight truncate">
-                      {program.location}
+                      {program.location || "Pole täpsustatud"}
                     </span>
                   </div>
                 </div>
@@ -130,7 +130,7 @@ export default async function ProgramPage({
                       Kestus
                     </span>
                     <span className="text-xs font-extrabold text-gray-700 leading-tight truncate">
-                      {program.durationMinutes}
+                      {program.durationMinutes || "Pole täpsustatud"}
                     </span>
                   </div>
                 </div>
@@ -158,7 +158,7 @@ export default async function ProgramPage({
                       Keeled
                     </span>
                     <span className="text-xs font-extrabold text-gray-700 leading-tight truncate">
-                      {program.language}
+                      {program.language || "Pole täpsustatud"}
                     </span>
                   </div>
                 </div>
@@ -299,7 +299,7 @@ export default async function ProgramPage({
                   </div>
                   <div className="flex flex-col min-w-0">
                     <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest leading-none mb-1">
-                      E-post: {program.organization?.email} email
+                      E-post: {program.organization?.email || "Puudub"}
                     </span>
                   </div>
                 </div>
@@ -312,7 +312,7 @@ export default async function ProgramPage({
                   </div>
                   <div className="flex flex-col min-w-0">
                     <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest leading-none mb-1">
-                      Telefon: {program.organization?.phone} phone
+                      Telefon: {program.organization?.phone || "Puudub"}
                     </span>
                   </div>
                 </div>
